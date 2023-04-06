@@ -1,0 +1,30 @@
+Book Store Database
+
+CREATE TABLE book_store (id INTEGER PRIMARY KEY, genre TEXT, quantity INTEGER, sold INTEGER, price INTEGER);
+
+INSERT into book_store values (1, "romance", 75, 40, 14);
+INSERT into book_store values (2, "sci-fi",60, 22, 10);
+INSERT into book_store values (3, "mystery", 40,13,11);
+INSERT into book_store values (4, "fantisy", 110,68, 12);
+INSERT into book_store values (5, "thriller",72,12,13);
+INSERT into book_store values (6, "children books", 40, 33, 8);
+INSERT into book_store values (7, "dystopian",68, 15, 15);
+INSERT into book_store values (8, "horror", 82, 50, 11);
+INSERT into book_store values (9, "poetry", 24, 8, 9);
+INSERT into book_store values (10, "mythology", 30, 10, 16);
+INSERT into book_store values (11, "autobiography", 15, 3, 16);
+INSERT into book_store values (12, "action_&_adventure", 43, 16, 13);
+INSERT into book_store values (13, "textbooks", 76, 61, 20);
+INSERT into book_store values (14, "history", 47, 15, 18);
+INSERT into book_store values (15, "graphic novles", 68, 47, 10);
+SELECT * FROM book_store;
+
+
+--The database is displayed by genre and price in descending order.
+SELECT genre, price from book_store ORDER BY price desc; 
+
+
+--The genre of book that were bought the least.
+SELECT * FROM book_store where sold < 30
+
+ 
