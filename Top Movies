@@ -114,7 +114,7 @@ INSERT INTO topmovies(Rank,Title,Studio,Worldwide,Domestic,DomesticPct,Overseas,
 --All the movies in the database in descending order.
 SELECT title, domestic from topmovies order by domestic desc;
 
---The studios in the database compared to their worldwide, domestic, and ocerseas revenue. 
+--The studios in the database compared to their worldwide, domestic, and overseas revenue. 
 SELECT studio, SUM(worldwide), SUM(domestic), SUM(overseas) from topmovies group by studio;
 
 --Movies after 2005 that did better domestically than overseas.
@@ -127,14 +127,16 @@ SELECT title, domestic, year from topmovies where domestic > overseas and year <
 --The average of all the movies worldwide revenue. 
 SELECT AVG(worldwide) as average_revenue from topmovies;
 
+--All the movies in the database are labaled as above average, below average or averaged based on the previous query.
 SELECT title, worldwide,
     case
-    when worldwide > 1000 then "above avg"
-    when worldwide < 600 then "below avg"
+    when worldwide > 900 then "above avg"
+    when worldwide < 700 then "below avg"
      else "avg"
      end as "averages"
 from topmovies group by title;
 
+--This query counts how many movies were in each lable of above average, below average or average. 
 SELECT count(*),
 case
     when worldwide > 900 then "above avg"
@@ -143,5 +145,8 @@ case
      end as "averages"
 from topmovies group by "averages";
 
+--What were the studios and their movies that had a domestic percent higher than 50%?
 SELECT studio, title, domesticPct from topmovies group by studio having domesticPct > 0.5;
+
+--What were the studios and their movies that had a overseas percent higher than 50%?
 SELECT studio, title, overseasPct from topmovies group by studio having overseasPct > 0.5;
