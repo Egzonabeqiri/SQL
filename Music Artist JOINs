@@ -1,0 +1,69 @@
+CREATE TABLE singers (id INTEGER PRIMARY KEY,
+        name TEXT,
+        stage_name TEXT,
+        age INTEGER,
+        gender TEXT);
+        
+INSERT INTO singers (name, stage_name, age,gender) VALUES ("Selena Gomez", "Null", 30,"female");
+INSERT INTO singers (name, stage_name, age,gender) VALUES ("Miley Cyrus", "Null", 30,"female");
+INSERT INTO singers (name, stage_name, age,gender) VALUES ("Aubrey Graham", "Drake", 36,"Male");
+INSERT INTO singers (name, stage_name, age,gender) VALUES ("Solána Rowe", "SZA", 33,"female");
+INSERT INTO singers (name, stage_name, age,gender) VALUES ("Marshall Mathers", "Eminem", 50, "Male");
+INSERT INTO singers (name, stage_name, age,gender) VALUES ("Ariana Grande", "Null", 29, "female");
+INSERT INTO singers (name, stage_name, age,gender) VALUES ("Taylor Swift", "Null", 33, "female");
+INSERT INTO singers (name, stage_name, age,gender) VALUES ("Abel Tesfaye", "The Weekend", 33, "Male");
+INSERT INTO singers (name, stage_name, age,gender) VALUES ("Giselle Knowles-Carter", "Beyoncé", 41, "female");
+INSERT INTO singers (name, stage_name, age,gender) VALUES ("Benito Ocasio","Bad Bunny", 29, "Male");
+SELECT * FROM singers;
+
+/*Based on spotify streams*/
+
+CREATE TABLE songs (id INTEGER PRIMARY KEY,
+        most_popular TEXT,
+        collab TEXT,
+        streams INTEGER,
+        year INTEGER);
+        
+INSERT INTO songs (most_popular, collab, streams, year) VALUES ("We Dont Talk Anymore", "Charlie Puth", 1.363, 2011);
+INSERT INTO songs (most_popular, collab, streams, year) VALUES ("Party In The U.S.A", "Null", 1.166, 2009);
+INSERT INTO songs (most_popular, collab, streams, year) VALUES ("One Dance", "Wizkid and Kyla", 2.536, 2016);
+INSERT INTO songs (most_popular, collab, streams, year) VALUES ("Kill Bill", "Null", 0.751, 2020);
+INSERT INTO songs (most_popular, collab, streams, year) VALUES ("Lose Yourself", "Null", 1.716, 2002);
+INSERT INTO songs (most_popular, collab, streams, year) VALUES ("7 Rings", "Null", 1.951, 2019);
+INSERT INTO songs (most_popular, collab, streams, year) VALUES ("I Don't Want To Live Forever", "Zayn", 1.371, 2017);
+INSERT INTO songs (most_popular, collab, streams, year) VALUES ("Blinding Lights", "Null", 3.510, 2020);
+INSERT INTO songs (most_popular, collab, streams, year) VALUES ("Halo", "Null",1.294, 2008);
+INSERT INTO songs (most_popular, collab, streams, year) VALUES ("DÁKITI", "Null", 1.673, 2020);
+
+SELECT * FROM songs;
+
+/*Artist and their most popular songs streams)*/
+SELECT singers.name, singers.stage_name, songs.most_popular, songs.streams from singers
+JOIN songs 
+ON singers.id = songs.id;
+
+/* Artists under the age of 30 */
+SELECT si.name, si.stage_name, so.most_popular, so.streams, si.age from singers si
+JOIN songs so
+ON si.id = so.id
+WHERE si.age < 30;
+
+/* Artists over the age of 30 */
+SELECT si.name, si.stage_name, so.most_popular, so.streams, si.age from singers si
+JOIN songs so
+ON si.id = so.id
+WHERE si.age > 30;
+
+/* The songs in the databased in desceding order based on streams*/
+SELECT singers.name, singers.stage_name, songs.most_popular, songs.streams from singers
+JOIN songs 
+ON singers.id = songs.id
+ORDER BY streams desc;
+
+/* All the female artists in desceding order */
+SELECT si.name, so.most_popular, so.streams, si.age, si.gender from singers si
+JOIN songs so
+ON si.id = so.id
+WHERE si.gender is "female"
+ORDER BY streams desc;
+
